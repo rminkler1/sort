@@ -16,4 +16,4 @@ Sorts arrays of Comparable objects.
 
 ## Shell Sort
 
-## Random Sort
+## Random Sort: just for fun - not a sorting algorithm
