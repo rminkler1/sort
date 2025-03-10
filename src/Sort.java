@@ -5,6 +5,10 @@
  */
 
 public class Sort {
+
+    /**
+     * Test code to verify the sorting algorithms work
+     */
     public static void main(String[] args) {
         Integer[] nums = {110, 14, 32, 23, 9, 4, 10, 6, 7, 8, 9, 0};
 
@@ -60,6 +64,9 @@ public class Sort {
 
     }
 
+    /**
+     * Insertion Sort
+     */
     public static <T extends Comparable<T>> void insertion(T[] a) {
 
         // Iterate through each element to insert it into the sorted array
@@ -74,6 +81,9 @@ public class Sort {
         }
     }
 
+    /**
+     * Bubble Sort
+     */
     public static <T extends Comparable<T>> void bubble(T[] a) {
 
         int k = a.length;
@@ -95,6 +105,9 @@ public class Sort {
         }
     }
 
+    /**
+     * Selection sort
+     */
     public static <T extends Comparable<T>> void selection(T[] a) {
 
         // Iterate through each index
@@ -195,16 +208,26 @@ public class Sort {
 
     }
 
+    /**
+     * Swaps values between the two array index locations
+     */
     private static <T extends Comparable<T>> void swap(T[] a, int i, int j) {
         T temp = a[i];
         a[i] = a[j];
         a[j] = temp;
     }
 
+    /**
+     * returns true if object q is less than object r
+     * objects must implement Comparable
+     */
     private static <T extends Comparable<T>> boolean less(T q, T r) {
         return q.compareTo(r) < 0;
     }
 
+    /**
+     * Verify the array is sorted
+     */
     public static <T extends Comparable<T>> boolean isSorted(T[] a) {
         for (int i = 1; i < a.length; i++) {
             if (less(a[i], a[i - 1])) return false;
@@ -212,10 +235,13 @@ public class Sort {
         return true;
     }
 
+    /**
+     * Checks if the portion of the array between lo and hi are sorted.
+     */
     public static <T extends Comparable<T>> boolean isSorted(T[] a, int lo, int hi) {
-        for (int i = lo; i < hi; i++) {
+        for (int i = lo; i < hi; i++)
             if (less(a[i + 1], a[i])) return false;
-        }
+
         return true;
     }
 }
