@@ -54,7 +54,7 @@ public class Sort {
         System.out.println(isSorted(nums));
         System.out.println(java.util.Arrays.toString(nums));
 
-        nums = new Integer[]{110, 14, 32, 23, 9, 4, 10, 6, 7, 8, 9};
+        nums = new Integer[]{1170, 184, 332, 234, 94, 45, 106, 46, 75, 899, 98, 110, 14, 352, 23, 977, 4, 10, 6, 7, 8, 9};
         System.out.println("\nMerge Sort:");
         System.out.println(isSorted(nums));
         System.out.println(java.util.Arrays.toString(nums));
@@ -79,6 +79,20 @@ public class Sort {
 
         // Iterate through each element to insert it into the sorted array
         for (int i = 0; i < a.length; i++) {
+
+            // Move the inserted element to the left until it is sorted
+            for (int j = i; j > 0; j--) {
+                if (less(a[j], a[j - 1])) {
+                    swap(a, j, j - 1);
+                }
+            }
+        }
+    }
+
+    public static <T extends Comparable<T>> void insertion(T[] a, int lo, int hi) {
+
+        // Iterate through each element to insert it into the sorted array
+        for (int i = lo; i <= hi; i++) {
 
             // Move the inserted element to the left until it is sorted
             for (int j = i; j > 0; j--) {
@@ -142,7 +156,15 @@ public class Sort {
     public static <T extends Comparable<T>> void mergeSort(T[] a, T[] aux, int lo, int hi) {
 
         // just return if nothing to do
-        if (hi <= lo) return;
+        // Replaced with insertion sort
+        // if (hi <= lo) return;
+
+        // sort small arrays with insertion sort for improved performance
+        int CUTOFF = 7;
+        if (hi <= lo + CUTOFF - 1) {
+            insertion(a, lo, hi);
+            return;
+        }
 
         // calculate midpoint
         int mid = lo + (hi - lo) / 2;
@@ -150,6 +172,9 @@ public class Sort {
         // divide the array into sections to sort and merge
         mergeSort(a, aux, lo, mid);
         mergeSort(a, aux, mid + 1, hi);
+
+        // if last item in lo is smaller than first item in hi, it is already sorted, no need to merge
+        if (!less(a[mid + 1], a[mid])) return;
 
         // merge sorted sections of the array
         merge(a, aux, lo, mid, hi);
