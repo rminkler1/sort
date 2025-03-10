@@ -50,6 +50,14 @@ public class Sort {
         System.out.println(isSorted(nums));
         System.out.println(java.util.Arrays.toString(nums));
 
+        nums = new Integer[]{110, 14, 32, 23, 9, 4, 10, 6, 7, 8, 9};
+        System.out.println("\nMerge Sort:");
+        System.out.println(isSorted(nums));
+        System.out.println(java.util.Arrays.toString(nums));
+        mergeSort(nums);
+        System.out.println(isSorted(nums));
+        System.out.println(java.util.Arrays.toString(nums));
+
     }
 
     public static <T extends Comparable<T>> void insertion(T[] a) {
@@ -106,21 +114,36 @@ public class Sort {
         }
     }
 
-//    public static <T extends Comparable<T>> T[] mergeSort(T[] a) {
-//        T[] q;
-//        T[] r;
-//        if (a.length > 2) {
-//            q = mergeSort(Arrays.copyOfRange(a, 0, a.length / 2));
-//            r = mergeSort(Arrays.copyOfRange(a, a.length / 2, a.length));
-//
-//            return merge(q, r);
-//
-//        } else {
-//            return merge(a[0], a[1]);
-//        }
-//
-//        return null;
-//    }
+
+    /**
+     * Sedgewick mergeSort
+     */
+    public static <T extends Comparable<T>> void mergeSort(T[] a, T[] aux, int lo, int hi) {
+
+        // just return if nothing to do
+        if (hi <= lo) return;
+
+        // calculate midpoint
+        int mid = lo + (hi - lo) / 2;
+
+        // divide the array into sections to sort and merge
+        mergeSort(a, aux, lo, mid);
+        mergeSort(a, aux, mid + 1, hi);
+
+        // merge sorted sections of the array
+        merge(a, aux, lo, mid, hi);
+    }
+
+    /**
+     * Sedgewick begin mergeSort
+     */
+    public static <T extends Comparable<T>> void mergeSort(T[] a) {
+        // create the aux array
+        T[] aux = (T[]) new Comparable[a.length];
+
+        // begin mergeSort
+        mergeSort(a, aux, 0, a.length - 1);
+    }
 
 
     /**
