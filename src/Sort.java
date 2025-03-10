@@ -154,8 +154,7 @@ public class Sort {
         assert isSorted(a, mid + 1, hi); // precondition: a[mid+1..hi] sorted
 
         // Copy array a to aux
-        for (int k = lo; k <= hi; k++)
-            aux[k] = a[k];
+        if (hi + 1 - lo >= 0) System.arraycopy(a, lo, aux, lo, hi + 1 - lo);
 
         int i = lo;
         int j = mid + 1;
