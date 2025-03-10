@@ -62,6 +62,14 @@ public class Sort {
         System.out.println(isSorted(nums));
         System.out.println(java.util.Arrays.toString(nums));
 
+        nums = new Integer[]{110, 14, 32, 23, 9, 4, 10, 6, 7, 8, 9};
+        System.out.println("\nRandom Sort:");
+        System.out.println(isSorted(nums));
+        System.out.println(java.util.Arrays.toString(nums));
+        randomSort(nums);
+        System.out.println(isSorted(nums));
+        System.out.println(java.util.Arrays.toString(nums));
+
     }
 
     /**
@@ -243,5 +251,29 @@ public class Sort {
             if (less(a[i + 1], a[i])) return false;
 
         return true;
+    }
+
+    /**
+     * This is not a sorting algorithm.
+     * It just randomizes the array and tests to see if it is sorted until it is sorted.
+     */
+    public static <T extends Comparable<T>> void randomSort(T[] a) {
+
+        // Stop if the array is sorted. It is a miracle.
+        while (!isSorted(a)) {
+            randomHelper(a);
+
+            // fun to watch the random arrays fly by as it sorts
+            System.out.println(java.util.Arrays.toString(a));
+        }
+    }
+
+    private static <T extends Comparable<T>> void randomHelper(T[] a) {
+        int randInt;
+
+        for (int i = 0; i < a.length; i++) {
+            randInt = (int) (Math.random() * a.length);
+            swap(a, i, randInt);
+        }
     }
 }
