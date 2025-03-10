@@ -106,6 +106,48 @@ public class Sort {
         }
     }
 
+//    public static <T extends Comparable<T>> T[] mergeSort(T[] a) {
+//        T[] q;
+//        T[] r;
+//        if (a.length > 2) {
+//            q = mergeSort(Arrays.copyOfRange(a, 0, a.length / 2));
+//            r = mergeSort(Arrays.copyOfRange(a, a.length / 2, a.length));
+//
+//            return merge(q, r);
+//
+//        } else {
+//            return merge(a[0], a[1]);
+//        }
+//
+//        return null;
+//    }
+
+
+    /**
+     * Sedgewick merge for merge sort
+     */
+    private static <T extends Comparable<T>> void merge(T[] a, T[] aux, int lo, int mid, int hi) {
+        assert isSorted(a, lo, mid); // precondition: a[lo..mid] sorted
+        assert isSorted(a, mid + 1, hi); // precondition: a[mid+1..hi] sorted
+
+        // Copy array a to aux
+        for (int k = lo; k <= hi; k++)
+            aux[k] = a[k];
+
+        int i = lo;
+        int j = mid + 1;
+
+        // merge
+        for (int k = lo; k <= hi; k++) {
+            if (i > mid) a[k] = aux[j++];       // if lo side complete, copy hi side
+            else if (j > hi) a[k] = aux[i++];   // if hi side complete copy lo side
+            else if (less(aux[j], aux[i])) a[k] = aux[j++];     // copy hi side if it is smaller
+            else a[k] = aux[i++];               // copy lo side if it is smaller
+        }
+
+        assert isSorted(a, lo, hi); // postcondition: a[lo..hi] sorted
+    }
+
     /**
      * Shell sort uses insertion sort, but instead of swapping one space back,
      * it makes larger swaps.
@@ -144,6 +186,13 @@ public class Sort {
     public static <T extends Comparable<T>> boolean isSorted(T[] a) {
         for (int i = 1; i < a.length; i++) {
             if (less(a[i], a[i - 1])) return false;
+        }
+        return true;
+    }
+
+    public static <T extends Comparable<T>> boolean isSorted(T[] a, int lo, int hi) {
+        for (int i = lo; i < hi; i++) {
+            if (less(a[i + 1], a[i])) return false;
         }
         return true;
     }
