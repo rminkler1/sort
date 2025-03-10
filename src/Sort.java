@@ -62,7 +62,7 @@ public class Sort {
         System.out.println(isSorted(nums));
         System.out.println(java.util.Arrays.toString(nums));
 
-        nums = new Integer[]{110, 14, 32, 23, 9, 4, 10, 6, 7, 8, 9};
+        nums = new Integer[]{110, 0, 6, 7, 8, 9};
         System.out.println("\nRandom Sort:");
         System.out.println(isSorted(nums));
         System.out.println(java.util.Arrays.toString(nums));
@@ -263,8 +263,9 @@ public class Sort {
         while (!isSorted(a)) {
             randomHelper(a);
 
-            // fun to watch the random arrays fly by as it sorts
-            System.out.println(java.util.Arrays.toString(a));
+            // it is fun to watch the random arrays fly by as it "sorts"
+            // uncomment the next line to see it
+            // System.out.println(java.util.Arrays.toString(a) + " Still crunching the numbers!");
         }
     }
 
