@@ -62,6 +62,14 @@ public class Sort {
         System.out.println(isSorted(nums));
         System.out.println(java.util.Arrays.toString(nums));
 
+        nums = new Integer[]{1170, 184, 332, 234, 94, 45, 106, 46, 75, 899, 98, 110, 14, 352, 23, 977, 4, 10, 6, 7, 8, 9};
+        System.out.println("\nBU Merge Sort:");
+        System.out.println(isSorted(nums));
+        System.out.println(java.util.Arrays.toString(nums));
+        buMergeSort(nums);
+        System.out.println(isSorted(nums));
+        System.out.println(java.util.Arrays.toString(nums));
+
         nums = new Integer[]{110, 0, 6, 7, 8, 9};
         System.out.println("\nRandom Sort:");
         System.out.println(isSorted(nums));
@@ -214,6 +222,23 @@ public class Sort {
         }
 
         assert isSorted(a, lo, hi); // postcondition: a[lo..hi] sorted
+    }
+
+
+    /**
+     * Bottom Up MergeSort
+     * MergeSort without recursion
+     * Sedgewick
+     */
+    public static <T extends Comparable<T>> void buMergeSort(T[] a) {
+        int len = a.length;
+        T[] aux = (T[]) new Comparable[len];
+
+        for (int size = 1; size < len; size += size) {
+            for (int lo = 0; lo < len - size; lo += size + size) {
+                merge(a, aux, lo, lo + size - 1, Math.min(lo + size + size - 1, len - 1));
+            }
+        }
     }
 
     /**
