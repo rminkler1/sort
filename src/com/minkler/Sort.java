@@ -1,3 +1,5 @@
+package com.minkler;
+
 /*
  * Robert Minkler
  * Sorting Algorithms
