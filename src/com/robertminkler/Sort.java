@@ -1,9 +1,8 @@
-package com.minkler;
+package com.robertminkler;
 
 /*
  * Robert Minkler
  * Sorting Algorithms
- * March 9, 2025
  */
 
 public class Sort {
