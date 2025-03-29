@@ -7,6 +7,7 @@ package com.robertminkler;
 
 public class Sort {
 
+
     /**
      * Test code to verify the sorting algorithms work
      */
@@ -81,6 +82,11 @@ public class Sort {
 
     }
 
+    /*
+     * Begin Sorting Algorithms
+     */
+
+
     /**
      * Insertion Sort
      */
@@ -98,6 +104,10 @@ public class Sort {
         }
     }
 
+
+    /**
+     * Insertion sort with start and end parameters
+     */
     public static <T extends Comparable<T>> void insertion(T[] a, int lo, int hi) {
 
         // Iterate through each element to insert it into the sorted array
@@ -111,6 +121,7 @@ public class Sort {
             }
         }
     }
+
 
     /**
      * Bubble Sort
@@ -136,6 +147,7 @@ public class Sort {
         }
     }
 
+
     /**
      * Selection sort
      */
@@ -160,7 +172,7 @@ public class Sort {
 
 
     /**
-     * Sedgewick mergeSort
+     * Sedgewick mergeSort with start and end parameters
      */
     public static <T extends Comparable<T>> void mergeSort(T[] a, T[] aux, int lo, int hi) {
 
@@ -190,7 +202,7 @@ public class Sort {
     }
 
     /**
-     * Sedgewick begin mergeSort
+     * Sedgewick begin mergeSort for the full array.
      */
     public static <T extends Comparable<T>> void mergeSort(T[] a) {
         // create the aux array
@@ -202,13 +214,13 @@ public class Sort {
 
 
     /**
-     * Sedgewick merge for merge sort
+     * Sedgewick merge operation for merge sort
      */
     private static <T extends Comparable<T>> void merge(T[] a, T[] aux, int lo, int mid, int hi) {
         assert isSorted(a, lo, mid); // precondition: a[lo..mid] sorted
         assert isSorted(a, mid + 1, hi); // precondition: a[mid+1..hi] sorted
 
-        // Copy array a to aux
+        // Copy array a to array aux
         if (hi + 1 - lo >= 0) System.arraycopy(a, lo, aux, lo, hi + 1 - lo);
 
         int i = lo;
@@ -227,8 +239,7 @@ public class Sort {
 
 
     /**
-     * Bottom Up MergeSort
-     * MergeSort without recursion
+     * Bottom Up MergeSort without recursion
      * Sedgewick
      */
     public static <T extends Comparable<T>> void buMergeSort(T[] a) {
@@ -241,6 +252,7 @@ public class Sort {
             }
         }
     }
+
 
     /**
      * Shell sort uses insertion sort, but instead of swapping one space back,
@@ -267,22 +279,33 @@ public class Sort {
 
     }
 
-    /**
-     * Swaps values between the two array index locations
-     */
-    private static <T extends Comparable<T>> void swap(T[] a, int i, int j) {
-        T temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
-    }
 
     /**
-     * returns true if object q is less than object r
-     * objects must implement Comparable
+     * This is not a sorting algorithm.
+     * It just randomizes the array and tests to see if it is sorted until it is sorted.
      */
-    private static <T extends Comparable<T>> boolean less(T q, T r) {
-        return q.compareTo(r) < 0;
+    public static <T extends Comparable<T>> void randomSort(T[] a) {
+
+        // Stop if the array is sorted. It is a miracle.
+        while (!isSorted(a)) {
+
+            // iterate through each array item and swap it with a random location in the array.
+            for (int i = 0; i < a.length; i++) {
+                int randInt = (int) (Math.random() * a.length);
+                swap(a, i, randInt);
+            }
+
+            // it is fun to watch the random arrays fly by as it "sorts"
+            // uncomment the next line to see it
+            // System.out.println(java.util.Arrays.toString(a) + " Not it! Still crunching the numbers!");
+        }
     }
+
+
+    /*
+     * Utility Methods
+     */
+
 
     /**
      * Verify the array is sorted
@@ -305,23 +328,19 @@ public class Sort {
     }
 
     /**
-     * This is not a sorting algorithm.
-     * It just randomizes the array and tests to see if it is sorted until it is sorted.
+     * Swaps values between the two array index locations
      */
-    public static <T extends Comparable<T>> void randomSort(T[] a) {
+    private static <T extends Comparable<T>> void swap(T[] a, int i, int j) {
+        T temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
 
-        // Stop if the array is sorted. It is a miracle.
-        while (!isSorted(a)) {
-
-            // iterate through each array item and swap it with a random location in the array.
-            for (int i = 0; i < a.length; i++) {
-                int randInt = (int) (Math.random() * a.length);
-                swap(a, i, randInt);
-            }
-
-            // it is fun to watch the random arrays fly by as it "sorts"
-            // uncomment the next line to see it
-            // System.out.println(java.util.Arrays.toString(a) + " Not it! Still crunching the numbers!");
-        }
+    /**
+     * returns true if object q is less than object r
+     * objects must implement Comparable
+     */
+    private static <T extends Comparable<T>> boolean less(T q, T r) {
+        return q.compareTo(r) < 0;
     }
 }
