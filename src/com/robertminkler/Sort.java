@@ -312,20 +312,16 @@ public class Sort {
 
         // Stop if the array is sorted. It is a miracle.
         while (!isSorted(a)) {
-            randomHelper(a);
+
+            // iterate through each array item and swap it with a random location in the array.
+            for (int i = 0; i < a.length; i++) {
+                int randInt = (int) (Math.random() * a.length);
+                swap(a, i, randInt);
+            }
 
             // it is fun to watch the random arrays fly by as it "sorts"
             // uncomment the next line to see it
-            // System.out.println(java.util.Arrays.toString(a) + " Still crunching the numbers!");
-        }
-    }
-
-    private static <T extends Comparable<T>> void randomHelper(T[] a) {
-        int randInt;
-
-        for (int i = 0; i < a.length; i++) {
-            randInt = (int) (Math.random() * a.length);
-            swap(a, i, randInt);
+            // System.out.println(java.util.Arrays.toString(a) + " Not it! Still crunching the numbers!");
         }
     }
 }
