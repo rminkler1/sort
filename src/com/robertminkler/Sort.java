@@ -206,6 +206,7 @@ public class Sort {
      */
     public static <T extends Comparable<T>> void mergeSort(T[] a) {
         // create the aux array
+        @SuppressWarnings("unchecked")
         T[] aux = (T[]) new Comparable[a.length];
 
         // begin mergeSort
@@ -244,6 +245,7 @@ public class Sort {
      */
     public static <T extends Comparable<T>> void buMergeSort(T[] a) {
         int len = a.length;
+        @SuppressWarnings("unchecked")
         T[] aux = (T[]) new Comparable[len];
 
         for (int size = 1; size < len; size += size) {
